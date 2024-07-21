@@ -22,6 +22,7 @@ Json::Value getStockQuote (const string& ticker, const string& api) {
     CURLcode res = curl_easy_perform(curl);
     if (res != CURLE_OK) {
         cout << "cURL request failed: " << curl_easy_strerror(res) << '\n';
+        curl_easy_cleanup(curl);
         return Json::Value();
     }
     curl_easy_cleanup(curl);
@@ -30,11 +31,15 @@ Json::Value getStockQuote (const string& ticker, const string& api) {
     Json::CharReader* reader = builder.newCharReader();
     Json::Value core;
     string errors;
-
+    // cout << jsonRespone << '\n';
     if (!reader ->parse(jsonRespone.c_str(), jsonRespone.c_str() + jsonRespone.size(), &core, &errors)) {
         cerr << "Failed to parse Json: " << errors << '\n';
         return Json::Value();
     }
     delete reader;
+    if (core.isMember("code") and core["code"].asString() == "404") {
+        return Json::Value();
+    }
+
     return core;
 }

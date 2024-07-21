@@ -14,6 +14,7 @@
                 "main.cpp",
                 "curlFunctions.cpp",
                 "functions.cpp",
+                "levenshtein.cpp",
                 "-o",
                 "main",
                 "-ljsoncpp",

@@ -21,7 +21,20 @@ int main() {
     while(true) {
         string name, exchange, currency;
         Json::Value stockData = getStockQuote(ticker, api);
-        float open, high, low, close;
+        if (stockData.empty()) {
+            transform(ticker.begin(), ticker.end(), ticker.begin(), [] (char c) {return tolower(c);});
+            vector<string> v = topThree(ticker);
+            cout << "Did you mean: 1." << v[0] << " or 2. " << v[1] << " or 3. " << v[2] << "?\n";
+            int res; cin >> res;
+            if ((res >= 4) or (res <= 0)) {
+                cout << "Please try another symbol.\n";
+                return 0;
+            } else {
+                ticker = v[res - 1];
+                stockData = getStockQuote(ticker, api);
+            }
+        }
+        float open = 0, high = 0, low = 0, close = 0;
         float price = 0;
         int amount = 0;
         char ans='\0';
@@ -47,9 +60,6 @@ int main() {
                     return 0;
                 }
             }
-        } else {
-            cerr << "Failed to fetch Stock Quote\n";
-            return 1;
         }
         printData(stockData);
         profitLoss(open, close, name);
