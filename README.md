@@ -8,7 +8,7 @@ Code SPECIFICALLY DESGINED FOR CLANG++. DO NOT IGNORE the "tasks.json" file in "
 
 YOU MAY NEED TO COMPLETELY CHANGE THE TASKS.JSON file to match you Mac Setup if you fiddle with directories.
 
-Input a ticker symbol and it gives advice on buy or sell. The advice is extremely basic and honestly shit, but that's because the purpose of this program is to explore cURL and JsonCpp.
+Input a ticker symbol and it gives advice on buy or sell. The advice is extremely basic and honestly bad, but that's because the purpose of this program is to explore cURL and JsonCpp.
 This program is inspired from https://github.com/OpenGenus/trading-app-in-cpp. Although the basic idea matches, I have heavily optimized the content of the code, written 
 by me on my mac, added several features and planning to make it much more robust. 
 
